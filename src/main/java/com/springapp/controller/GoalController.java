@@ -3,10 +3,14 @@ package com.springapp.controller;
 import com.springapp.model.GoalModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import javax.validation.Valid;
+
 
 @Controller
 @SessionAttributes("goal")
@@ -23,8 +27,15 @@ public class GoalController {
     }
 
     @RequestMapping(value = "/addGoal", method = RequestMethod.POST)
-    public String updateGoal(@ModelAttribute("goal") GoalModel goalModel) {
+    public String updateGoal(@Valid @ModelAttribute("goal") GoalModel goalModel, BindingResult result) {
+
+        System.out.println("Result has errors: " + result.hasErrors());
+
         System.out.println("Minutes updated: " + goalModel.getMinutes());
+
+        if (result.hasErrors()) {
+            return "addGoal";
+        }
 
         return "redirect:addMinutes";
     }

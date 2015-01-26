@@ -10,23 +10,39 @@
 <html>
 <head>
     <title>Add Goal</title>
+    <style type="text/css">
+        .error {
+            color: firebrick;
+        }
+
+        .error-block {
+            color: black;
+            background-color: #ffEEEE;
+            border: 3px solid firebrick;
+            padding: 8px;
+            margin: 16px;
+        }
+    </style>
 </head>
 <body>
 <h1>Add Goal</h1>
 
 <form:form modelAttribute="goal">
+    <!-- path="*" means handle all errors -->
+    <form:errors path="*" cssClass="error-block" element="div"/>
+    <table>
+        <tr>
+            <td>Enter minutes:</td>
+            <td><form:input path="minutes" cssErrorClass="error"/></td>
+            <td><form:errors path="minutes" cssClass="error"/></td>
 
-  <table>
-    <tr>
-      <td>Enter minutes: </td>
-      <td><form:input path="minutes" /></td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <input type="submit" value="Save Goal Minutes" />
-      </td>
-    </tr>
-  </table>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input type="submit" value="Save Goal Minutes"/>
+            </td>
+        </tr>
+    </table>
 
 </form:form>
 
