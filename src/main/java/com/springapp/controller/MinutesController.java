@@ -2,6 +2,8 @@ package com.springapp.controller;
 
 import com.springapp.model.Activity;
 import com.springapp.model.MinutesModel;
+import com.springapp.service.ActivityService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,9 @@ import java.util.List;
 @Controller
 public class MinutesController {
 
+    @Autowired
+    private ActivityService activityService;
+
     @RequestMapping("/addMinutes")
     public String addMinutes(@ModelAttribute(value = "minutesModel") MinutesModel minutesModel) {
         System.out.println("Added minutes: " + minutesModel.getMinutes());
@@ -25,13 +30,8 @@ public class MinutesController {
 
     @RequestMapping(value = "/activities", method = RequestMethod.GET)
     public @ResponseBody List<Activity> findAllActivities() {
-        List<Activity> activities = new ArrayList<>();
 
-        activities.add(new Activity("run"));
-        activities.add(new Activity("bike"));
-        activities.add(new Activity("swim"));
-
-        return activities;
+        return activityService.findAllActivities();
     }
 
 }
