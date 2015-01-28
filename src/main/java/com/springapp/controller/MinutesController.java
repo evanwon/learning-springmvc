@@ -18,6 +18,8 @@ public class MinutesController {
     public String addMinutes(@ModelAttribute(value = "minutesModel") MinutesModel minutesModel) {
         System.out.println("Added minutes: " + minutesModel.getMinutes());
 
+        System.out.println("Activity: " + minutesModel.getActivity());
+
         return "addMinutes";
     }
 
